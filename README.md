@@ -29,6 +29,10 @@ General note about the functionality.  Based on mimicing `Docker` functionality,
 
 `dvdcli path --volumedriver=rexray --volumename=test`
 
+EMC {code} - REX-Ray
+-------
+The `REX-Ray` project is a good example of a service that can expose a valid Volume Driver endpoint that can be used and is available [here](https://github.com/emccode/rexray).
+
 # Licensing
 ---------
 Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>
