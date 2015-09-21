@@ -17,7 +17,7 @@ For `dvdcli`, the command is very similar.
 
 Examples
 --------
-General note about the functionality.  Based on mimicing `Docker` functionality, a create is called at the beginning of each of these operations.  The existing Volume Driver spec expects idompetent operations.
+General note about the functionality.  Based on mimicing `Docker` functionality, a create is called at the beginning of each of these operations.  The existing Volume Driver spec expects idempotent operations.
 
 `dvdcli mount --volumedriver=rexray --volumename=test`
 
