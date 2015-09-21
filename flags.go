@@ -1,11 +1,6 @@
 package main
 
-import "github.com/spf13/cobra"
-
 func initFlags() {
-	cobra.HelpFlagShorthand = "?"
-	cobra.HelpFlagUsageFormatString = "Help for %s"
-
 	initGlobalFlags()
 
 }
