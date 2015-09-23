@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -32,7 +33,12 @@ var createCmd = &cobra.Command{
 	Short: "Create a volume",
 	Run: func(cmd *cobra.Command, args []string) {
 		initDvd()
-		vol, err := driver.Create(volumeName, nil)
+		opts := make(map[string]string)
+		for _, opt := range volumeOpts {
+			nameValue := strings.Split(opt, "=")
+			opts[nameValue[0]] = nameValue[1]
+		}
+		vol, err := driver.Create(volumeName, opts)
 		if err != nil {
 			log.WithField("volumeName", volumeName).Error(err)
 			os.Exit(1)
@@ -63,7 +69,14 @@ var mountCmd = &cobra.Command{
 	Short: "Mount a volume",
 	Run: func(cmd *cobra.Command, args []string) {
 		initDvd()
-		vol, err := driver.Create(volumeName, nil)
+
+		opts := make(map[string]string)
+		for _, opt := range volumeOpts {
+			nameValue := strings.Split(opt, "=")
+			opts[nameValue[0]] = nameValue[1]
+		}
+
+		vol, err := driver.Create(volumeName, opts)
 		if err != nil {
 			log.WithField("volumeName", volumeName).Error(err)
 			os.Exit(1)

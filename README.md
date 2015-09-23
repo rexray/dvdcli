@@ -19,11 +19,11 @@ Examples
 --------
 General note about the functionality.  Based on mimicing `Docker` functionality, a create is called at the beginning of each of these operations.  The existing Volume Driver spec expects idempotent operations.
 
-`dvdcli mount --volumedriver=rexray --volumename=test`
+`dvdcli mount --volumedriver=rexray --volumename=test123456789  --volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 --volumeopts=newFsType=ext4 --volumeopts=overwritefs=true`
 
 `dvdcli unmount --volumedriver=rexray --volumename=test`
 
-`dvdcli create --volumedriver=rexray --volumename=test`
+`dvdcli create --volumedriver=rexray --volumename=test123456789  --volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 --volumeopts=newFsType=ext4 --volumeopts=overwritefs=true`
 
 `dvdcli remove --volumedriver=rexray --volumename=test`
 
