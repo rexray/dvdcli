@@ -20,19 +20,33 @@ Examples
 General note about the functionality.  Based on mimicing `Docker` functionality, a create is called at the beginning of each of these operations.  The existing Volume Driver spec expects idempotent operations.
 
 #### Mount a volume
-`dvdcli mount --volumedriver=rexray --volumename=test123456789  --volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 --volumeopts=newFsType=ext4 --volumeopts=overwritefs=true`
+```
+dvdcli mount --volumedriver=rexray --volumename=test123456789  \
+  --volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 \
+  --volumeopts=newFsType=ext4 --volumeopts=overwritefs=true
+```
 
 #### Unmount a volume
-`dvdcli unmount --volumedriver=rexray --volumename=test`
+```
+dvdcli unmount --volumedriver=rexray --volumename=test
+```
 
 #### Create a volume
-`dvdcli create --volumedriver=rexray --volumename=test123456789  --volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 --volumeopts=newFsType=ext4 --volumeopts=overwritefs=true`
+```
+dvdcli create --volumedriver=rexray --volumename=test123456789 \
+--volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 \
+--volumeopts=newFsType=ext4 --volumeopts=overwritefs=true
+```
 
 #### Remove a volume
-`dvdcli remove --volumedriver=rexray --volumename=test`
+```
+dvdcli remove --volumedriver=rexray --volumename=test
+```
 
 #### Return path of a mounted volume
-`dvdcli path --volumedriver=rexray --volumename=test`
+```
+dvdcli path --volumedriver=rexray --volumename=test
+```
 
 #### Extra Options
 option|description
