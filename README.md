@@ -34,8 +34,8 @@ dvdcli unmount --volumedriver=rexray --volumename=test
 #### Create a volume
 ```
 dvdcli create --volumedriver=rexray --volumename=test123456789 \
---volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 \
---volumeopts=newFsType=ext4 --volumeopts=overwritefs=true
+  --volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 \
+  --volumeopts=newFsType=ext4 --volumeopts=overwritefs=true
 ```
 
 #### Remove a volume
