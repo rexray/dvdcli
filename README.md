@@ -19,19 +19,39 @@ Examples
 --------
 General note about the functionality.  Based on mimicing `Docker` functionality, a create is called at the beginning of each of these operations.  The existing Volume Driver spec expects idempotent operations.
 
+#### Mount a volume
 `dvdcli mount --volumedriver=rexray --volumename=test123456789  --volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 --volumeopts=newFsType=ext4 --volumeopts=overwritefs=true`
 
+#### Unmount a volume
 `dvdcli unmount --volumedriver=rexray --volumename=test`
 
+#### Create a volume
 `dvdcli create --volumedriver=rexray --volumename=test123456789  --volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 --volumeopts=newFsType=ext4 --volumeopts=overwritefs=true`
 
+#### Remove a volume
 `dvdcli remove --volumedriver=rexray --volumename=test`
 
+#### Return path of a mounted volume
 `dvdcli path --volumedriver=rexray --volumename=test`
+
+#### Extra Options
+option|description
+------|-----------
+size|Size in GB
+IOPS|IOPS
+volumeType|Type of Volume or Storage Pool
+newFsType|FS Type for Volume if filesystem unknown
+overwriteFs|Overwrite existing known filesystem
+volumeName|Create from an existing volume name
+volumeID|Creat from an existing volume ID
+snapshotName|Create from an existing snapshot name
+snapshotID|Create from an existing snapshot ID
+
+
 
 EMC {code} - REX-Ray
 -------
-The `REX-Ray` project is a good example of a service that can expose a valid Volume Driver endpoint that can be used and is available [here](https://github.com/emccode/rexray).
+The `REX-Ray` project is a good example of a service that can expose a valid Volume Driver endpoint that can be used and is available [here](https://github.com/emccode/rexray).  The options mentioned above are dependent on the Volume Driver.  `REX-Ray` does implement options as listed above.
 
 # Licensing
 ---------
