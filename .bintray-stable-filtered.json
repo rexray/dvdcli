@@ -1,0 +1,28 @@
+{
+   "package": {
+        "name": "stable",
+        "repo": "dvdcli",
+        "subject": "clintonskitson"
+    },
+
+    "version": {
+        "name": "0.1.0-rc1+14",
+        "desc": "0.1.0-rc1+14.Branch.patch/foundation_updates.Sha.5a7820be15b48e7e25c8ef6523c4b386c6eaa1c9",
+        "released": "2015-09-30",
+        "gpgSign": false
+    },
+
+    "files": [
+        {
+            "includePattern": ".deploy/(.+)/(.*\.tar\.gz)",
+            "excludePattern": ".deploy/latest/(.*)",
+            "uploadPattern": "stable/0.1.0-rc1+14/$2"
+        },
+        {
+            "includePattern": ".deploy/latest/(.*)",
+            "uploadPattern": "stable/latest/$1"
+        }
+    ],
+
+    "publish": true
+}

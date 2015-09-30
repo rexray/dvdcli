@@ -1,1 +1,5 @@
 dvdcli
+vendor/*
+.deploy/*
+.bin/*
+.rpmbuild/
