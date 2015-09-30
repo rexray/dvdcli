@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	log "github.com/Sirupsen/logrus"
+	"github.com/emccode/rexray/util"
 	"github.com/spf13/cobra"
 )
 
@@ -15,6 +16,7 @@ func initCommands() {
 	DvdcliCmd.AddCommand(mountCmd)
 	DvdcliCmd.AddCommand(unmountCmd)
 	DvdcliCmd.AddCommand(pathCmd)
+	DvdcliCmd.AddCommand(versionCmd)
 }
 
 //DvdcliCmd
@@ -128,5 +130,13 @@ var pathCmd = &cobra.Command{
 			log.Info(fmt.Sprintf("%s", path))
 			fmt.Println(path)
 		}
+	},
+}
+
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "Print the version",
+	Run: func(cmd *cobra.Command, args []string) {
+		util.PrintVersion(os.Stdout)
 	},
 }
