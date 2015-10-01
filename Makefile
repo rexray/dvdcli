@@ -200,7 +200,7 @@ build_:
 	@printf "  ...building dvdcli $(V_OS_ARCH)..."; \
 		cd $(BASEDIR); \
 		FILE=.bin/$(V_OS_ARCH)/dvdcli; \
-		env GOOS=$(_GOOS) GOARCH=$(_GOARCH) go build -o $$FILE $(GOFLAGS) $(LDFLAGS) .; \
+		env GOOS=$(_GOOS) GOARCH=$(_GOARCH) go build -o $$FILE $(GOFLAGS) $(LDFLAGS) ./dvdcli; \
 		$(PRINT_STATUS); \
 		if [ "$$EC" -eq "0" ]; then \
 			mkdir -p .deploy/$(V_OS_ARCH); \
@@ -273,7 +273,7 @@ _install: _deps _fmt
 	@printf "  ...installing dvdcli $(V_OS_ARCH)..."; \
 		cd $(BASEDIR); \
 		go clean -i $(VERSIONPKG); \
-		go install $(GOFLAGS) $(LDFLAGS) . ./version_info/ ./dvdcli/; \
+		go install $(GOFLAGS) $(LDFLAGS) ./version_info/ ./dvdcli/; \
 		$(PRINT_STATUS); \
 		if [ "$$EC" -eq "0" ]; then \
 			FILE=$(GOPATH)/bin/dvdcli; \
