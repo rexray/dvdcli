@@ -1,4 +1,4 @@
-# dvdcli [![Build Status](http://travis-ci.org/emccode/dvdcli.svg?branch=master)](https://travis-ci.org/emccode/dvdcli) [![Coverage Status](http://coveralls.io/repos/emccode/dvdcli/badge.svg?branch=master&service=github)](https://coveralls.io/github/emccode/dvdcli?branch=master) [ ![Download](http://api.bintray.com/packages/clintonskitson/dvdcli/staged/images/download.svg) ](https://dl.bintray.com/clintonskitson/dvdcli/staged/latest/)
+# dvdcli [![Build Status](http://travis-ci.org/emccode/dvdcli.svg?branch=master)](https://travis-ci.org/emccode/dvdcli) [![Coverage Status](http://coveralls.io/repos/emccode/dvdcli/badge.svg?branch=master&service=github)](https://coveralls.io/github/emccode/dvdcli?branch=master)
 `dvdcli` is a Docker Volume Driver client CLI.  The CLI is used enable any application to call the CLI to perform external Volume Management to a Linux host.  This project exposes the `Docker` Volume Driver eco-system for additional use cases.
 
 Docker Volume Driver
