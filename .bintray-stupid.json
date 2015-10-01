@@ -1,0 +1,28 @@
+{
+   "package": {
+        "name": "unstable",
+        "repo": "dvdcli",
+        "subject": "clintonskitson"
+    },
+
+    "version": {
+        "name": "${SEMVER}",
+        "desc": "${DSCRIP}",
+        "released": "${RELDTE}",
+        "gpgSign": false
+    },
+
+    "files": [
+        {
+            "includePattern": ".deploy/(.+)/(.*\.tar\.gz)",
+            "excludePattern": ".deploy/latest/(.*)",
+            "uploadPattern": "unstable/${SEMVER}/$2"
+        },
+        {
+            "includePattern": ".deploy/latest/(.*)",
+            "uploadPattern": "unstable/latest/$1"
+        }
+    ],
+
+    "publish": true
+}
