@@ -1,1 +1,4 @@
 dvdcli
+vendor/*
+.deploy/*
+.bin/*
