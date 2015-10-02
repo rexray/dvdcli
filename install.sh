@@ -52,8 +52,7 @@ else
       rm -f dvdcli-$OS-$ARCH.tar.gz && \
       sudo chmod 0755 $BIN_FILE && \
       sudo chown 0 $BIN_FILE && \
-      sudo chgrp 0 $BIN_FILE && \
-      sudo $BIN_FILE install
+      sudo chgrp 0 $BIN_FILE
 fi
 
 echo
