@@ -6,7 +6,7 @@ OS=$(uname -s)
 ARCH=$(uname -m)
 SUDO=$(which sudo)
 BIN_DIR=/usr/bin
-BIN_FILE=$BIN_DIR/rexray
+BIN_FILE=$BIN_DIR/dvdcli
 
 function sudo() {
     if [[ $(id -u) -eq 0 ]]; then $@; else $SUDO $@; fi
@@ -24,7 +24,7 @@ if [[ -e /etc/redhat-release || \
       -e /etc/redhat-version ]]; then
 
     #echo "installing rpm"
-    sudo rpm -ih --quiet $URL/rexray-latest-$ARCH.rpm > /dev/null
+    sudo rpm -ih --quiet $URL/dvdcli-latest-$ARCH.rpm > /dev/null
 
 elif [[ $ARCH = x86_64 && \
        (-e /etc/debian-release || \
@@ -33,23 +33,23 @@ elif [[ $ARCH = x86_64 && \
         $IS_COREOS -eq 1 ]]; then
 
     #echo "installing deb"
-    curl -sSLO $URL/rexray-latest-$ARCH.deb && \
-        sudo dpkg -i rexray-latest-$ARCH.deb && \
-        rm -f rexray-latest-$ARCH.deb
+    curl -sSLO $URL/dvdcli-latest-$ARCH.deb && \
+        sudo dpkg -i dvdcli-latest-$ARCH.deb && \
+        rm -f dvdcli-latest-$ARCH.deb
 
 else
     if [[ $IS_COREOS -eq 0 ]]; then
         BIN_DIR=/opt/bin
-        BIN_FILE=$BIN_DIR/rexray
+        BIN_FILE=$BIN_DIR/dvdcli
     elif [[ $OS = Darwin ]]; then
         BIN_DIR=/usr/local/bin
-        BIN_FILE=$BIN_DIR/rexray
+        BIN_FILE=$BIN_DIR/dvdcli
     fi
 
     sudo mkdir -p $BIN_DIR && \
-      curl -sSLO $URL/rexray-$OS-$ARCH.tar.gz && \
-      sudo tar xzf rexray-$OS-$ARCH.tar.gz -C $BIN_DIR && \
-      rm -f rexray-$OS-$ARCH.tar.gz && \
+      curl -sSLO $URL/dvdcli-$OS-$ARCH.tar.gz && \
+      sudo tar xzf dvdcli-$OS-$ARCH.tar.gz -C $BIN_DIR && \
+      rm -f dvdcli-$OS-$ARCH.tar.gz && \
       sudo chmod 0755 $BIN_FILE && \
       sudo chown 0 $BIN_FILE && \
       sudo chgrp 0 $BIN_FILE && \
