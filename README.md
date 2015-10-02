@@ -14,8 +14,6 @@ Installing `dvdcli` couldn't be easier.
 curl -sSL https://dl.bintray.com/emccode/dvdcli/install | sh -
 ```
 
-On Linux systems the above command will download `dvdcli` and install it at `/usr/bin/rexray` and register it as a SystemV or SystemD service depending on what the Linux distribution supports. On Darwin (OS X) systems the binary is installed at `/usr/bin/rexray` sans service registration.
-
 # Downloading
 There are also pre-built binaries at the following locations:
 
