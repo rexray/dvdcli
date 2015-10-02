@@ -6,6 +6,25 @@ Docker Volume Driver
 
 As of `Docker` 1.7, there was a Volume Driver API defined that allows `Docker` to work with external storage providers.  The API documentation is available [here](https://github.com/docker/docker/blob/master/docs/extend/index.md).  The existing API has five main features, `Create`, `Remove`, `Mount`, `Unmount`, `Path`.  In order to leverage these features, a Volume Driver is created that manages and orchestrates the API calls to specific storage platforms.  It is these Volume Drivers that this project is using in order to enable Volume Management.  See official plugins [here](https://github.com/docker/docker/blob/master/docs/extend/plugins.md).
 
+
+# Installation
+Installing `dvdcli` couldn't be easier.
+
+```bash
+curl -sSL https://dl.bintray.com/emccode/dvdcli/install | sh -
+```
+
+On Linux systems the above command will download `dvdcli` and install it at `/usr/bin/rexray` and register it as a SystemV or SystemD service depending on what the Linux distribution supports. On Darwin (OS X) systems the binary is installed at `/usr/bin/rexray` sans service registration.
+
+# Downloading
+There are also pre-built binaries at the following locations:
+
+Repository | Version | Description
+---------- | ------- | -----------
+[unstable](https://dl.bintray.com/emccode/dvdcli/unstable) | [ ![Download](https://api.bintray.com/packages/emccode/dvdcli/unstable/images/download.svg) ](https://dl.bintray.com/emccode/dvdcli/unstable/latest/) | The most up-to-date, bleeding-edge, and often unstable dvdcli binaries.
+[staged](https://dl.bintray.com/emccode/dvdcli/staged)   | [ ![Download](https://api.bintray.com/packages/emccode/dvdcli/staged/images/download.svg) ](https://dl.bintray.com/emccode/dvdcli/staged/latest/) | The most up-to-date, release candidate dvdcli binaries.
+[stable](https://dl.bintray.com/emccode/dvdcli/stable)   | [ ![Download](https://api.bintray.com/packages/emccode/dvdcli/stable/images/download.svg) ](https://dl.bintray.com/emccode/dvdcli/stable/latest/) | The most up-to-date, stable dvdcli binaries.
+
 CLI
 ---
 The CLI takes advantage of native `Docker` packages which means the functionality available from the CLI mimics what the `Docker` daemon does to manage Volumes.  In addition, the SPEC relating to how the API communicates, ie looking up socket files or HTTP endpoints, is respected entirely.
@@ -65,7 +84,7 @@ snapshotID|Create from an existing snapshot ID
 
 EMC {code} - REX-Ray
 -------
-The `REX-Ray` project is a good example of a service that can expose a valid Volume Driver endpoint that can be used and is available [here](https://github.com/emccode/rexray).  The options mentioned above are dependent on the Volume Driver.  `REX-Ray` does implement options as listed above.
+The `REX-Ray` project is a good example of a service that can expose a valid Volume Driver endpoint that can be used and is available [here](https://github.com/emccode/dvdcli).  The options mentioned above are dependent on the Volume Driver.  `REX-Ray` does implement options as listed above.
 
 # Licensing
 ---------
