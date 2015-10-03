@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/emccode/rexray/util"
+	"github.com/emccode/dvdcli/util"
 	"github.com/spf13/cobra"
 )
 
