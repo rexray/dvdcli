@@ -93,3 +93,4 @@ Unless required by applicable law or agreed to in writing, software distributed 
 # Support
 -------
 Please file bugs and issues at the Github issues page. For more general discussions you can contact the EMC Code team at <a href="https://groups.google.com/forum/#!forum/emccode-users">Google Groups</a> or tagged with **EMC** on <a href="https://stackoverflow.com">Stackoverflow.com</a>. We also are available for real-time feedback on the EMC {code} Slack channel [here](http://community.emccode.com/).  The code and documentation are released with no warranties or SLAs and are intended to be supported through a community driven process.
+
