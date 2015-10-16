@@ -8,7 +8,7 @@ As of `Docker` 1.7, there was a Volume Driver API defined that allows `Docker` t
 
 
 # Installation
-Installing `dvdcli` couldn't be easier.  The `install` file can be replaced with `install-unstable`, or `install-staged` as well.
+Installing `dvdcli` couldn't be easier.  The `sh -` portion can be replaced with `sh -s unstable -`, or `sh -s staged` as well.
 
 ```bash
 curl -sSL https://dl.bintray.com/emccode/dvdcli/install | sh -
