@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 REPO="${1:-stable}"
 URL=https://dl.bintray.com/emccode/dvdcli/$REPO/latest
