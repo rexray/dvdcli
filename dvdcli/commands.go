@@ -78,6 +78,14 @@ var mountCmd = &cobra.Command{
 			opts[nameValue[0]] = nameValue[1]
 		}
 
+		if (checkVolumeExist) {
+			vol, err := driver.Get(volumeName)
+			if err != nil {
+				log.WithField("volumeName", volumeName).Error(err)
+				os.Exit(1)
+			}
+		}
+
 		vol, err := driver.Create(volumeName, opts)
 		if err != nil {
 			log.WithField("volumeName", volumeName).Error(err)
@@ -100,6 +108,15 @@ var unmountCmd = &cobra.Command{
 	Short: "Unmount a volume",
 	Run: func(cmd *cobra.Command, args []string) {
 		initDvd()
+
+		if (checkVolumeExist) {
+			vol, err := driver.Get(volumeName)
+			if err != nil {
+				log.WithField("volumeName", volumeName).Error(err)
+				os.Exit(1)
+			}
+		}
+
 		vol, err := driver.Create(volumeName, nil)
 		if err != nil {
 			log.WithField("volumeName", volumeName).Error(err)
@@ -119,6 +136,15 @@ var pathCmd = &cobra.Command{
 	Short: "Path of a volume",
 	Run: func(cmd *cobra.Command, args []string) {
 		initDvd()
+
+		if (checkVolumeExist) {
+			vol, err := driver.Get(volumeName)
+			if err != nil {
+				log.WithField("volumeName", volumeName).Error(err)
+				os.Exit(1)
+			}
+		}
+
 		vol, err := driver.Create(volumeName, nil)
 		if err != nil {
 			log.WithField("volumeName", volumeName).Error(err)
