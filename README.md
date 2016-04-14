@@ -4,14 +4,14 @@
 Docker Volume Driver
 --------------------
 
-As of `Docker` 1.7, there was a Volume Driver API defined that allows `Docker` to work with external storage providers.  The API documentation is available [here](https://github.com/docker/docker/blob/master/docs/extend/index.md).  The existing API has five main features, `Create`, `Remove`, `Mount`, `Unmount`, `Path`.  In order to leverage these features, a Volume Driver is created that manages and orchestrates the API calls to specific storage platforms.  It is these Volume Drivers that this project is using in order to enable Volume Management.  See official plugins [here](https://github.com/docker/docker/blob/master/docs/extend/plugins.md).
+As of `Docker` 1.7, there was a Volume Driver API defined that allows `Docker` to work with external storage providers.  The API documentation is available [here](https://github.com/docker/docker/blob/master/docs/extend/index.md).  As of Docker 1.11.0, the API has seven main features, `Create`, `Remove`, `Mount`, `Unmount`, `Path`, `List`, `Get`.  In order to leverage these features, a Volume Driver is created that manages and orchestrates the API calls to specific storage platforms.  It is these Volume Drivers that this project is using in order to enable Volume Management.  See official plugins [here](https://github.com/docker/docker/blob/master/docs/extend/plugins.md).
 
 
 # Installation
-Installing `dvdcli` couldn't be easier.  The `sh -` portion can be replaced with `sh -s unstable -`, or `sh -s staged` as well.
+Installing `dvdcli` couldn't be easier.  The `sh -` portion can be replaced with `sh -s unstable`, or `sh -s staged` as well.
 
 ```bash
-curl -sSL https://dl.bintray.com/emccode/dvdcli/install | sh -
+curl -sSL https://dl.bintray.com/emccode/dvdcli/install | sh -s stable
 ```
 
 # Downloading
@@ -34,9 +34,27 @@ For `dvdcli`, the command is very similar.
 
 Examples
 --------
-General note about the functionality.  Based on mimicing `Docker` functionality, a create is called at the beginning of each of these operations.  The existing Volume Driver spec expects idempotent operations.
-
 #### Mount a volume
+##### Explicit
+If you would like to ensure a mount operation is interpreted solely as a mount
+the `--explicitCreate=true` flag can be specified.
+
+```
+dvdcli mount --explicitCreate --volumedriver=rexray --volumename=test123456789
+```
+
+##### Implicit
+It is possible to issue a mount command which would create a volume if it does
+not exist as well as mount the volume. This is the default behavior.
+
+```
+dvdcli mount --volumedriver=rexray --volumename=test123456789
+```
+
+#### Implicit with Options
+It is also possible to create implicitly and also specify options for the
+volume that is created.
+
 ```
 dvdcli mount --volumedriver=rexray --volumename=test123456789  \
   --volumeopts=size=5 --volumeopts=iops=150 --volumeopts=volumetype=io1 \
@@ -65,7 +83,21 @@ dvdcli remove --volumedriver=rexray --volumename=test
 dvdcli path --volumedriver=rexray --volumename=test
 ```
 
+#### List availabile volumes
+```
+dvdcli list --volumedriver=rexray
+```
+
+#### Get a specific volume or check whether exists or not
+```
+dvdcli get --volumedriver=rexray --volumename=test
+```
+
 #### Extra Options
+These options are specific to the interpretation of the Volume Driver that
+you are invoking. For [REX-Ray](https://github.com/emccode/rexray) these
+would be valid options.
+
 option|description
 ------|-----------
 size|Size in GB
@@ -79,10 +111,9 @@ snapshotName|Create from an existing snapshot name
 snapshotID|Create from an existing snapshot ID
 
 
-
 EMC {code} - REX-Ray
 -------
-The `REX-Ray` project is a good example of a service that can expose a valid Volume Driver endpoint that can be used and is available [here](https://github.com/emccode/dvdcli).  The options mentioned above are dependent on the Volume Driver.  `REX-Ray` does implement options as listed above.
+The `REX-Ray` project is a good example of a service that can expose a valid Volume Driver endpoint that can be used and is available [here](https://github.com/emccode/rexray).  The options mentioned above are dependent on the Volume Driver.  `REX-Ray` does implement options as listed above.
 
 # Licensing
 ---------

@@ -16,6 +16,8 @@ func initCommands() {
 	DvdcliCmd.AddCommand(mountCmd)
 	DvdcliCmd.AddCommand(unmountCmd)
 	DvdcliCmd.AddCommand(pathCmd)
+	DvdcliCmd.AddCommand(getCmd)
+	DvdcliCmd.AddCommand(listCmd)
 	DvdcliCmd.AddCommand(versionCmd)
 }
 
@@ -56,8 +58,13 @@ var removeCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		initDvd()
 
-		vol := fakeVolume{volumeName}
-		err := driver.Remove(vol)
+		vol, err := driver.Get(volumeName)
+		if err != nil {
+			log.WithField("volumeName", volumeName).Error(err)
+			os.Exit(1)
+		}
+
+		err = driver.Remove(vol)
 		if err != nil {
 			log.WithField("volumeName", volumeName).Error(err)
 			os.Exit(1)
@@ -78,10 +85,19 @@ var mountCmd = &cobra.Command{
 			opts[nameValue[0]] = nameValue[1]
 		}
 
-		vol, err := driver.Create(volumeName, opts)
-		if err != nil {
+		vol, err := driver.Get(volumeName)
+		if err != nil && explicitCreate {
 			log.WithField("volumeName", volumeName).Error(err)
 			os.Exit(1)
+		}
+
+		if vol == nil && !explicitCreate {
+			var err error
+			vol, err = driver.Create(volumeName, opts)
+			if err != nil {
+				log.WithField("volumeName", volumeName).Error(err)
+				os.Exit(1)
+			}
 		}
 
 		path, err := vol.Mount()
@@ -100,7 +116,7 @@ var unmountCmd = &cobra.Command{
 	Short: "Unmount a volume",
 	Run: func(cmd *cobra.Command, args []string) {
 		initDvd()
-		vol, err := driver.Create(volumeName, nil)
+		vol, err := driver.Get(volumeName)
 		if err != nil {
 			log.WithField("volumeName", volumeName).Error(err)
 			os.Exit(1)
@@ -119,7 +135,7 @@ var pathCmd = &cobra.Command{
 	Short: "Path of a volume",
 	Run: func(cmd *cobra.Command, args []string) {
 		initDvd()
-		vol, err := driver.Create(volumeName, nil)
+		vol, err := driver.Get(volumeName)
 		if err != nil {
 			log.WithField("volumeName", volumeName).Error(err)
 			os.Exit(1)
@@ -129,6 +145,38 @@ var pathCmd = &cobra.Command{
 		if path != "" {
 			log.Info(fmt.Sprintf("%s", path))
 			fmt.Println(path)
+		}
+	},
+}
+
+//getCmd
+var getCmd = &cobra.Command{
+	Use:   "get",
+	Short: "Get a volume",
+	Run: func(cmd *cobra.Command, args []string) {
+		initDvd()
+		vol, err := driver.Get(volumeName)
+		if err != nil {
+			log.WithField("volumeName", volumeName).Error(err)
+			os.Exit(1)
+		}
+		fmt.Println(vol.Name())
+	},
+}
+
+//listCmd
+var listCmd = &cobra.Command{
+	Use:   "list",
+	Short: "List a volume",
+	Run: func(cmd *cobra.Command, args []string) {
+		initDvd()
+		volList, err := driver.List()
+		if err != nil {
+			log.Error(err)
+			os.Exit(1)
+		}
+		for _, vol := range volList {
+			fmt.Println(vol.Name())
 		}
 	},
 }

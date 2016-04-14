@@ -17,8 +17,6 @@ func init() {
 	// initUsageTemplates()
 }
 
-const version = "0.1"
-
 func updateLogLevel() {
 	log.SetLevel(log.DebugLevel)
 }

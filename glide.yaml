@@ -3,7 +3,7 @@ import:
   - package: github.com/inconshreveable/mousetrap
     ref:     76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
   - package: github.com/docker/docker
-    ref:     4dfa996cc246691de5e6f509939b96e8643ac228
+    ref:     v1.11.0
   - package: github.com/cpuguy83/go-md2man
     ref:     71acacd42f85e5e82f70a55327789582a5200a90
   - package: github.com/russross/blackfriday
@@ -16,3 +16,5 @@ import:
     ref:     d732ab3a34e6e9e6b5bdac80707c2b6bad852936
   - package: github.com/shurcooL/sanitized_anchor_name
     ref:     244f5ac324cb97e1987ef901a0081a77bfd8e845
+  - package: github.com/docker/go-connections
+    ref:     master

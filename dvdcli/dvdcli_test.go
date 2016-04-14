@@ -24,6 +24,14 @@ func TestPathCmd(t *testing.T) {
 	pathCmd.Execute()
 }
 
+func TestGetCmd(t *testing.T) {
+	getCmd.Execute()
+}
+
+func TestListCmd(t *testing.T) {
+	listCmd.Execute()
+}
+
 func TestVersionCmd(t *testing.T) {
 	versionCmd.Execute()
 }
