@@ -1,7 +1,5 @@
 #!/bin/bash
 
-BINTRAY_USER=clintonskitson
-BINTRAY_APIKEY=2909ff03d795fd4d824d787e9d96142c0cb6d110
 BINTRAY_ACCOUNT=emccode
 BINTRAY_REPO=dvdcli
 BINTRAY_URL=https://api.bintray.com/content/$BINTRAY_ACCOUNT/$BINTRAY_REPO
