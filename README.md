@@ -1,10 +1,22 @@
 # dvdcli [![Build Status](http://travis-ci.org/emccode/dvdcli.svg)](https://travis-ci.org/emccode/dvdcli) [![Coverage Status](http://coveralls.io/repos/emccode/dvdcli/badge.svg?branch=master&service=github&cache=0)](https://coveralls.io/github/emccode/dvdcli?branch=master) [ ![Download](http://api.bintray.com/packages/emccode/dvdcli/stable/images/download.svg) ](https://dl.bintray.com/emccode/dvdcli/stable/latest/)
 `dvdcli` is a Docker Volume Driver client CLI.  The CLI is used enable any application to call the CLI to perform external Volume Management to a Linux host.  This project exposes the `Docker` Volume Driver eco-system for additional use cases.
 
-Docker Volume Driver
+Docker Volume Plugins
 --------------------
 
 As of `Docker` 1.7, there was a Volume Driver API defined that allows `Docker` to work with external storage providers.  The API documentation is available [here](https://github.com/docker/docker/blob/master/docs/extend/index.md).  As of Docker 1.11.0, the API has seven main features, `Create`, `Remove`, `Mount`, `Unmount`, `Path`, `List`, `Get`.  In order to leverage these features, a Volume Driver is created that manages and orchestrates the API calls to specific storage platforms.  It is these Volume Drivers that this project is using in order to enable Volume Management.  See official plugins [here](https://github.com/docker/docker/blob/master/docs/extend/plugins.md).
+
+
+Volume Plugin Compatibility
+---------------------------
+In order to use dvdcli `0.2.0` or above your Volume Plugin must be able to perform a `Get()` operation. This functionality only came about with Docker 1.10 so please make sure the plugin that `dvdcli` is interfacing with has this capability.
+
+Note: This does not mean that Docker is required for `dvdcli` to function. `dvdcli` currently shares the `Docker Engine 1.11.0` functionality for requesting volumes and talking with volume plugins so the compatibility of `dvdcli` tracks the specified Docker Engine version. If your plugin supports the necessary Docker Engine version then it will work with `dvdcli`.
+
+Volume Plugin Docker Compatibility|dvdcli Version
+--|--
+Docker 1.10+|0.2.0
+Docker <1.10|0.1.0
 
 
 # Installation
