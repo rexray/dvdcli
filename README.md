@@ -13,8 +13,8 @@ In order to use dvdcli `0.2.0` or above your Volume Plugin must be able to perfo
 
 Note: This does not mean that Docker is required for `dvdcli` to function. `dvdcli` currently shares the `Docker Engine 1.11.0` functionality for requesting volumes and talking with volume plugins so the compatibility of `dvdcli` tracks the specified Docker Engine version. If your plugin supports the necessary Docker Engine version then it will work with `dvdcli`.
 
-Volume Plugin Docker Compatibility|dvdcli Version
---|--
+Volume Plugin Docker Compatibility | dvdcli Version
+---------------------------------- | --------------
 Docker 1.10+|0.2.0
 Docker <1.10|0.1.0
 
