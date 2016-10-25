@@ -4,7 +4,7 @@
 Docker Volume Plugins
 --------------------
 
-As of `Docker` 1.7, there was a Volume Driver API defined that allows `Docker` to work with external storage providers.  The API documentation is available [here](https://github.com/docker/docker/blob/master/docs/extend/index.md).  As of Docker 1.11.0, the API has seven main features, `Create`, `Remove`, `Mount`, `Unmount`, `Path`, `List`, `Get`.  In order to leverage these features, a Volume Driver is created that manages and orchestrates the API calls to specific storage platforms.  It is these Volume Drivers that this project is using in order to enable Volume Management.  See official plugins [here](https://github.com/docker/docker/blob/master/docs/extend/plugins.md).
+As of `Docker` 1.7, there was a Volume Driver API defined that allows `Docker` to work with external storage providers.  The API documentation is available [here](https://github.com/docker/docker/blob/master/docs/extend/index.md).  As of Docker 1.11.0, the API has seven main features, `Create`, `Remove`, `Mount`, `Unmount`, `Path`, `List`, `Get`.  In order to leverage these features, a Volume Driver is created that manages and orchestrates the API calls to specific storage platforms.  It is these Volume Drivers that this project is using in order to enable Volume Management.  See official plugins [here](https://github.com/docker/docker/blob/master/docs/extend/legacy_plugins.md#volume-plugins).
 
 
 Volume Plugin Compatibility
