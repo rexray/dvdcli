@@ -7,9 +7,9 @@ Version: %{v_semver}
 Release: 1
 License: Apache License
 Group: Applications/Storage
-#Source: https://github.com/emccode/dvdcli/archive/master.zip
-URL: https://github.com/emccode/dvdcli
-Vendor: EMC{code}
+#Source: https://github.com/codedellemc/dvdcli/archive/master.zip
+URL: https://github.com/codedellemc/dvdcli
+Vendor: {code} by Dell EMC
 Packager: Andrew Kutz <sakutz@gmail.com>
 BuildArch: %{v_arch}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}

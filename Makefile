@@ -1,5 +1,17 @@
 # configure make
-export MAKEFLAGS := $(MAKEFLAGS) --no-print-directory -k
+export MAKEFLAGS := $(MAKEFLAGS) --no-print-directory -k -j1
+
+# MAKE_LOG_LEVEL can be 0=quiet, 1=error, 2=verbose
+MAKE_LOG_LEVEL ?= 0
+ifeq ($(MAKE_LOG_LEVEL),0)
+	MAKE_LOG_FD := \&> /dev/null
+else
+ifeq ($(MAKE_LOG_LEVEL),1)
+	MAKE_LOG_FD := 1> /dev/null
+else
+	MAKE_LOG_FD :=
+endif
+endif
 
 # store the current working directory
 CWD := $(shell pwd)
@@ -91,7 +103,7 @@ else
 	endif
 endif
 ifeq ($(origin TRAVIS_TAG), undefined)
-	TRAVIS_TAG := $(TRAVIS_BRANCH)
+ 	TRAVIS_TAG := $(TRAVIS_BRANCH)
 else
 	ifeq ($(strip $(TRAVIS_TAG)),)
 		TRAVIS_TAG := $(TRAVIS_BRANCH)
@@ -145,7 +157,7 @@ V_RPM_SEMVER := $(subst -,+,$(V_SEMVER))
 GOFLAGS := $(GOFLAGS)
 GLIDE := $(GOPATH)/bin/glide
 NV := $$($(GLIDE) novendor)
-BASEPKG := github.com/emccode/dvdcli
+BASEPKG := github.com/codedellemc/dvdcli
 BASEDIR := $(GOPATH)/src/$(BASEPKG)
 BASEDIR_NAME := $(shell basename $(BASEDIR))
 BASEDIR_PARENTDIR := $(shell dirname $(BASEDIR))
@@ -158,7 +170,7 @@ LDF_SHA_LONG := -X $(VERSIONPKG).ShaLong=$(V_SHA_LONG)
 LDF_ARCH = -X $(VERSIONPKG).Arch=$(V_OS_ARCH)
 LDFLAGS = -ldflags "$(LDF_SEMVER) $(LDF_BRANCH) $(LDF_EPOCH) $(LDF_SHA_LONG) $(LDF_ARCH)"
 RPMBUILD := $(CWD)/.rpmbuild
-EMCCODE := $(GOPATH)/src/github.com/emccode
+CODEDELLEMC := $(GOPATH)/src/github.com/codedellemc
 PRINT_STATUS = export EC=$$?; cd $(CWD); if [ "$$EC" -eq "0" ]; then printf "SUCCESS!\n"; else exit $$EC; fi
 STAT_FILE_SIZE = stat --format '%s' $$FILE 2> /dev/null || stat -f '%z' $$FILE 2> /dev/null
 

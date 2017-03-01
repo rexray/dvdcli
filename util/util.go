@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 
 	"github.com/bugsnag/osext"
-	version "github.com/emccode/dvdcli/version_info"
+	version "github.com/codedellemc/dvdcli/version_info"
 )
 
 var thisExeAbsPath string

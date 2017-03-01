@@ -1,4 +1,4 @@
-package: github.com/emccode/dvdcli
+package: github.com/codedellemc/dvdcli
 import:
   - package: github.com/inconshreveable/mousetrap
     ref:     76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
