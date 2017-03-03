@@ -22,14 +22,14 @@ func TestGetPathPaths(t *testing.T) {
 func TestGetThisPathParts(t *testing.T) {
 	dirPath, fileName, absPath := GetThisPathParts()
 	if !strings.Contains(dirPath,
-		"github.com/emccode/dvdcli/util/_test") {
+		"github.com/codedellemc/dvdcli/util/_test") {
 		t.Fail()
 	}
 	if fileName != "util.test" {
 		t.Fail()
 	}
 	if !strings.Contains(absPath,
-		"github.com/emccode/dvdcli/util/_test/util.test") {
+		"github.com/codedellemc/dvdcli/util/_test/util.test") {
 		t.Fail()
 	}
 }
