@@ -102,9 +102,7 @@ else
 		TRAVIS_BRANCH := $(shell git branch | grep '*' | awk '{print $$2}')
 	endif
 endif
-ifeq ($(origin TRAVIS_TAG), undefined)
- 	TRAVIS_TAG := $(TRAVIS_BRANCH)
-else
+ifneq ($(origin TRAVIS_TAG), undefined)
 	ifeq ($(strip $(TRAVIS_TAG)),)
 		TRAVIS_TAG := $(TRAVIS_BRANCH)
 	endif
