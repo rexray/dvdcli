@@ -27,7 +27,7 @@ DEBS="dvdcli-latest-$X86_64.deb"
 FILES="$TGZS $RPMS $DEBS"
 
 bintray_delete_latest() {
-    curl -vvf -u$BINTRAY_USER:$BINTRAY_APIKEY -X DELETE $1/$2 || true
+    curl -f -u$BINTRAY_USER:$BINTRAY_KEY -X DELETE $1/$2 || true
     echo
 }
 
