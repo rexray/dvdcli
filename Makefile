@@ -46,11 +46,14 @@ else
 		ifneq ($(filter %86,$(UNAME_P)),)
 			export GOARCH = 386
 		endif
+		ifeq ($(UNAME_P),s390x)
+			export GOARCH = s390x
+		endif
 	endif
 endif
 
 # init the build platforms
-BUILD_PLATFORMS ?= Linux-i386 Linux-x86_64 Darwin-x86_64
+BUILD_PLATFORMS ?= Linux-i386 Linux-x86_64 Darwin-x86_64 Linux-s390x
 
 # init the internal go os and architecture variable values used for naming files
 _GOOS ?= $(GOOS)
@@ -88,6 +91,9 @@ ifeq ($(_GOARCH),386)
 endif
 ifeq ($(_GOARCH),amd64)
 	V_ARCH := x86_64
+endif
+ifeq ($(_GOARCH),s390x)
+	V_ARCH := s390x
 endif
 V_OS_ARCH := $(V_OS)-$(V_ARCH)
 
@@ -229,7 +235,7 @@ build_:
 		fi
 
 build-all: _pre-make version-noarch _deps _fmt build-all_ _post-make
-build-all_: build-linux-386_ build-linux-amd64_ build-darwin-amd64_
+build-all_: build-linux-386_ build-linux-amd64_ build-darwin-amd64_ build-linux-s390x_
 
 deploy-prep:
 	@echo "target: deploy-prep"
@@ -276,6 +282,12 @@ build-darwin-amd64_:
 rebuild-darwin-amd64: _pre-make _clean _build-darwin-amd64 _post-make
 rebuild-all-darwin-amd64: _pre-make _clean-all _build-darwin-amd64 _post-make
 
+build-linux-s390x: _pre-make _build-linux-s390x _post-make
+_build-linux-s390x: _deps _fmt build-linux-s390x_
+build-linux-s390x_:
+	@if [ "" != "$(findstring Linux-s390x,$(BUILD_PLATFORMS))" ] && [ "" != "$(findstring s390x,$(UNAME_P))" ]; then \
+		env _GOOS=linux _GOARCH=s390x make build_; \
+	fi
 
 install: _pre-make version-noarch _install _post-make
 _install: _deps _fmt
@@ -380,7 +392,13 @@ rpm-linux-amd64:
 		env _GOOS=linux _GOARCH=amd64 make rpm; \
 	fi
 
-rpm-all: rpm-linux-386 rpm-linux-amd64
+rpm-linux-s390x:
+	@if [ "" != "$(findstring Linux-s390x,$(BUILD_PLATFORMS))" ] && [ "" != "$(findstring s390x,$(UNAME_P))" ]; then \
+		env _GOOS=linux _GOARCH=s390x make rpm; \
+	fi
+
+
+rpm-all: rpm-linux-386 rpm-linux-amd64 rpm-linux-s390x
 
 deb:
 	@echo "target: deb"
@@ -405,7 +423,12 @@ deb-linux-amd64:
 		env _GOOS=linux _GOARCH=amd64 make deb; \
 	fi
 
-deb-all: deb-linux-amd64
+deb-linux-s390x:
+	@if [ "" != "$(findstring Linux-s390x,$(BUILD_PLATFORMS))" ] && [ "" != "$(findstring s390x,$(UNAME_P))" ]; then \
+		env _GOOS=linux _GOARCH=s390x make deb; \
+	fi
+
+deb-all: deb-linux-amd64 deb-linux-s390x
 
 test: _install
 	@echo "target: test"
