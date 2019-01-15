@@ -1,4 +1,4 @@
-# dvdcli [![Build Status](http://travis-ci.org/emccode/dvdcli.svg)](https://travis-ci.org/emccode/dvdcli) [![Coverage Status](http://coveralls.io/repos/emccode/dvdcli/badge.svg?branch=master&service=github&cache=0)](https://coveralls.io/github/emccode/dvdcli?branch=master) [ ![Download](http://api.bintray.com/packages/emccode/dvdcli/stable/images/download.svg) ](https://dl.bintray.com/emccode/dvdcli/stable/latest/)
+# dvdcli [![Build Status](http://travis-ci.org/rexray/dvdcli.svg)](https://travis-ci.org/rexray/dvdcli) [![Coverage Status](http://coveralls.io/repos/emccode/dvdcli/badge.svg?branch=master&service=github&cache=0)](https://coveralls.io/github/emccode/dvdcli?branch=master) [ ![Download](http://api.bintray.com/packages/emccode/dvdcli/stable/images/download.svg) ](https://dl.bintray.com/emccode/dvdcli/stable/latest/)
 `dvdcli` is a Docker Volume Driver client CLI.  The CLI is used enable any application to call the CLI to perform external Volume Management to a Linux host.  This project exposes the `Docker` Volume Driver eco-system for additional use cases.
 
 Docker Volume Plugins
@@ -107,7 +107,7 @@ dvdcli get --volumedriver=rexray --volumename=test
 
 #### Extra Options
 These options are specific to the interpretation of the Volume Driver that
-you are invoking. For [REX-Ray](https://github.com/emccode/rexray) these
+you are invoking. For [REX-Ray](https://github.com/rexray/rexray) these
 would be valid options.
 
 option|description
@@ -125,7 +125,7 @@ snapshotID|Create from an existing snapshot ID
 
 EMC {code} - REX-Ray
 -------
-The `REX-Ray` project is a good example of a service that can expose a valid Volume Driver endpoint that can be used and is available [here](https://github.com/emccode/rexray).  The options mentioned above are dependent on the Volume Driver.  `REX-Ray` does implement options as listed above.
+The `REX-Ray` project is a good example of a service that can expose a valid Volume Driver endpoint that can be used and is available [here](https://github.com/rexray/rexray).  The options mentioned above are dependent on the Volume Driver.  `REX-Ray` does implement options as listed above.
 
 # Licensing
 ---------
