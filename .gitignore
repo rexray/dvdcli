@@ -1,3 +1,4 @@
+/dvdcli/dvdcli
 var/
 etc/
 .bintray-stable-filtered.json
@@ -5,7 +6,6 @@ etc/
 .bintray-staged-filtered.json
 .bin/
 .deploy/
-vendor/
 .build/
 .rpmbuild/
 example

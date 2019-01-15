@@ -1,7 +1,7 @@
 language: go
 
-go:
-  - 1.7.5
+go: 1.7.5
+go_import_path: github.com/rexray/dvdcli
 
 addons:
   apt:

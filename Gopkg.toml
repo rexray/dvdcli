@@ -1,0 +1,41 @@
+# Refer to https://github.com/golang/dep/blob/master/docs/Gopkg.toml.md
+# for detailed Gopkg.toml documentation.
+#
+# Refer to https://github.com/toml-lang/toml for detailed TOML docs.
+#
+[prune]
+  non-go = true
+  go-tests = true
+  unused-packages = true
+
+[[constraint]]
+  name = "github.com/Sirupsen/logrus"
+  revision = "418b41d23a1bf978c06faea5313ba194650ac088"
+
+[[constraint]]
+  name = "github.com/docker/docker"
+  version = "=1.11.0"
+
+[[constraint]]
+  name = "github.com/spf13/cobra"
+   revision = "d732ab3a34e6e9e6b5bdac80707c2b6bad852936"
+
+[[override]]
+  name = "github.com/shurcooL/sanitized_anchor_name"
+  revision = "244f5ac324cb97e1987ef901a0081a77bfd8e845"
+
+[[override]]
+  name = "github.com/inconshreveable/mousetrap"
+  revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
+
+[[override]]
+  name = "github.com/cpuguy83/go-md2man"
+  revision = "71acacd42f85e5e82f70a55327789582a5200a90"
+
+[[override]]
+  name = "github.com/russross/blackfriday"
+  revision = "8cec3a854e68dba10faabbe31c089abf4a3e57a6"
+
+[[override]]
+  name = "github.com/spf13/pflag"
+  revision = "b084184666e02084b8ccb9b704bf0d79c466eb1d"
