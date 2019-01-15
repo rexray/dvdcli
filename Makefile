@@ -160,8 +160,8 @@ V_RPM_SEMVER := $(subst -,+,$(V_SEMVER))
 
 GOFLAGS := $(GOFLAGS)
 GLIDE := $(GOPATH)/bin/glide
-NV := $$($(GLIDE) novendor)
-BASEPKG := github.com/codedellemc/dvdcli
+NV := ./dvdcli ./util
+BASEPKG := github.com/rexray/dvdcli
 BASEDIR := $(GOPATH)/src/$(BASEPKG)
 BASEDIR_NAME := $(shell basename $(BASEDIR))
 BASEDIR_PARENTDIR := $(shell dirname $(BASEDIR))
@@ -174,7 +174,6 @@ LDF_SHA_LONG := -X $(VERSIONPKG).ShaLong=$(V_SHA_LONG)
 LDF_ARCH = -X $(VERSIONPKG).Arch=$(V_OS_ARCH)
 LDFLAGS = -ldflags "$(LDF_SEMVER) $(LDF_BRANCH) $(LDF_EPOCH) $(LDF_SHA_LONG) $(LDF_ARCH)"
 RPMBUILD := $(CWD)/.rpmbuild
-CODEDELLEMC := $(GOPATH)/src/github.com/codedellemc
 PRINT_STATUS = export EC=$$?; cd $(CWD); if [ "$$EC" -eq "0" ]; then printf "SUCCESS!\n"; else exit $$EC; fi
 STAT_FILE_SIZE = stat --format '%s' $$FILE 2> /dev/null || stat -f '%z' $$FILE 2> /dev/null
 
@@ -195,22 +194,8 @@ _post-make:
 		mv $(BASEDIR_TEMPMVLOC) $(BASEDIR); \
 	fi
 
-deps: _pre-make _deps _post-make
-_deps:
-	@if [ -z "$$OFFLINE" ]; then \
-		echo "target: deps"; \
-		printf "  ...installing glide..."; \
-		go get github.com/Masterminds/glide; \
-			$(PRINT_STATUS); \
-		printf "  ...downloading go dependencies..."; \
-			cd $(BASEDIR); \
-			go get -d $(GOFLAGS) $(NV); \
-			$(GLIDE) -q up 2> /dev/null; \
-			$(PRINT_STATUS); \
-	fi
-
 build: _pre-make _build _post-make
-_build: _deps _fmt build_
+_build: _fmt build_
 build_:
 	@echo "target: build"
 	@printf "  ...building dvdcli $(V_OS_ARCH)..."; \
@@ -234,7 +219,7 @@ build_:
 			printf "  $$FILE\n\n"; \
 		fi
 
-build-all: _pre-make version-noarch _deps _fmt build-all_ _post-make
+build-all: _pre-make version-noarch _fmt build-all_ _post-make
 build-all_: build-linux-386_ build-linux-amd64_ build-darwin-amd64_ build-linux-s390x_
 
 deploy-prep:
@@ -255,7 +240,7 @@ deploy-prep:
 		printf "SUCCESS!\n"
 
 build-linux-386: _pre-make _build-linux-386 _post-make
-_build-linux-386: _deps _fmt build-linux-386_
+_build-linux-386: _fmt build-linux-386_
 build-linux-386_:
 	@if [ "" != "$(findstring Linux-i386,$(BUILD_PLATFORMS))" ]; then \
 		env _GOOS=linux _GOARCH=386 make build_; \
@@ -264,7 +249,7 @@ rebuild-linux-386: _pre-make _clean _build-linux-386 _post-make
 rebuild-all-linux-386: _pre-make _clean-all _build-linux-386 _post-make
 
 build-linux-amd64: _pre-make _build-linux-amd64 _post-make
-_build-linux-amd64: _deps _fmt build-linux-amd64_
+_build-linux-amd64: _fmt build-linux-amd64_
 build-linux-amd64_:
 	@if [ "" != "$(findstring Linux-x86_64,$(BUILD_PLATFORMS))" ]; then \
 		env _GOOS=linux _GOARCH=amd64 make build_; \
@@ -274,7 +259,7 @@ rebuild-all-linux-amd64: _pre-make _clean-all _build-linux-amd64 _post-make
 
 
 build-darwin-amd64: _pre-make _build-darwin-amd64 _post-make
-_build-darwin-amd64: _deps _fmt build-darwin-amd64_
+_build-darwin-amd64: _fmt build-darwin-amd64_
 build-darwin-amd64_:
 	@if [ "" != "$(findstring Darwin-x86_64,$(BUILD_PLATFORMS))" ]; then \
 		env _GOOS=darwin _GOARCH=amd64 make build_; \
@@ -283,14 +268,14 @@ rebuild-darwin-amd64: _pre-make _clean _build-darwin-amd64 _post-make
 rebuild-all-darwin-amd64: _pre-make _clean-all _build-darwin-amd64 _post-make
 
 build-linux-s390x: _pre-make _build-linux-s390x _post-make
-_build-linux-s390x: _deps _fmt build-linux-s390x_
+_build-linux-s390x: _fmt build-linux-s390x_
 build-linux-s390x_:
 	@if [ "" != "$(findstring Linux-s390x,$(BUILD_PLATFORMS))" ] && [ "" != "$(findstring s390x,$(UNAME_P))" ]; then \
 		env _GOOS=linux _GOARCH=s390x make build_; \
 	fi
 
 install: _pre-make version-noarch _install _post-make
-_install: _deps _fmt
+_install: _fmt
 	@echo "target: install"
 	@printf "  ...installing dvdcli $(V_OS_ARCH)..."; \
 		cd $(BASEDIR); \
@@ -490,10 +475,10 @@ reinstall-all: _pre-make _clean-all _build _post-make
 retest: _pre-make _clean test _post-make
 retest-all: _pre-make _clean-all test _post-make
 
-.PHONY: all install build build_ build-all deps fmt fix clean version \
+.PHONY: all install build build_ build-all fmt fix clean version \
 				rpm rpm-all deb deb-all test clean clean-all rebuild reinstall \
 				retest clean-etc
 
-.NOTPARALLEL: all test clean clean-all deps _deps fmt _fmt fix \
+.NOTPARALLEL: all test clean clean-all fmt _fmt fix \
 							pre-make _pre-make post-make _post-make build build-all_ \
 							install rpm rebuild reinstall retest clean-etc

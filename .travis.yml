@@ -1,7 +1,7 @@
 language: go
 
-go:
-  - 1.7.5
+go: 1.11
+go_import_path: github.com/rexray/dvdcli
 
 addons:
   apt:
@@ -34,7 +34,7 @@ deploy:
     skip_cleanup: true
     on:
       all_branches: true
-      condition: $TRAVIS_TAG =~ ^$ && ($TRAVIS_REPO_SLUG = 'codedellemc/dvdcli' || $IGNORE_REPO_SLUG_CONDITION = true) && ($TRAVIS_BRANCH = master || $IGNORE_BRANCH_CONDITION = true)
+      condition: $TRAVIS_TAG =~ ^$ && ($TRAVIS_REPO_SLUG = 'rexray/dvdcli' || $IGNORE_REPO_SLUG_CONDITION = true) && ($TRAVIS_BRANCH = master || $IGNORE_BRANCH_CONDITION = true)
 
   - provider: bintray
     file: .bintray-staged-filtered.json
@@ -43,7 +43,7 @@ deploy:
     skip_cleanup: true
     on:
       all_branches: true
-      condition: $TRAVIS_TAG =~ -rc[[:digit:]]+$ && ($TRAVIS_REPO_SLUG = 'codedellemc/dvdcli' || $IGNORE_REPO_SLUG_CONDITION = true)
+      condition: $TRAVIS_TAG =~ -rc[[:digit:]]+$ && ($TRAVIS_REPO_SLUG = 'rexray/dvdcli' || $IGNORE_REPO_SLUG_CONDITION = true)
 
   - provider: bintray
     file: .bintray-stable-filtered.json
@@ -52,12 +52,11 @@ deploy:
     skip_cleanup: true
     on:
       all_branches: true
-      condition: $TRAVIS_TAG =~ ^v?[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]$ && ($TRAVIS_REPO_SLUG = 'codedellemc/dvdcli' || $IGNORE_REPO_SLUG_CONDITION = true)
+      condition: $TRAVIS_TAG =~ ^v?[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]$ && ($TRAVIS_REPO_SLUG = 'rexray/dvdcli' || $IGNORE_REPO_SLUG_CONDITION = true)
 
 cache:
   apt: true
   directories:
-    - $GOPATH/pkg
     - $HOME/.opt
 
 sudo: required
