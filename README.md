@@ -52,7 +52,7 @@ If you would like to ensure a mount operation is interpreted solely as a mount
 the `--explicitCreate=true` flag can be specified.
 
 ```
-dvdcli mount --explicitCreate --volumedriver=rexray --volumename=test123456789
+dvdcli mount --explicitcreate --volumedriver=rexray --volumename=test123456789
 ```
 
 ##### Implicit
